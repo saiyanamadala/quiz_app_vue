@@ -29,7 +29,7 @@ const logout = () => {
       </div>
       <div class="user-item" @click="toggleDropdown">
         <span class="material-symbols-outlined"> account_circle </span>
-        <span>{{ userStore.userName }}</span>
+        <span>{{ userStore.userName.split(' ')[0] }}</span>
         <div v-if="dropdownVisible" class="dropdown">
           <ul>
             <li @click="logout">Logout</li>
