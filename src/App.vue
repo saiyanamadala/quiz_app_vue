@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterView, useRouter } from 'vue-router'
-import { useUserStore } from '../src/stores/user.ts'
+import { useUserStore } from '../src/stores/user'
 import { ref } from 'vue'
 
 const userStore = useUserStore()
