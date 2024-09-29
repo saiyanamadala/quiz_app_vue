@@ -52,6 +52,7 @@ const onClick = () => {
       error.value = 'Please signup'
     } else {
       if (username.value === storedUsername && password.value === storedPassword) {
+        localStorage.setItem('userAuth', true)
         userStore.isAuthenticated = true
         const from = router.currentRoute.value.query.from || '/'
         router.push(from)
