@@ -1,30 +1,32 @@
 <template>
-  <div class="login-wrapper">
-    <h2>SIGN IN</h2>
-    <div class="login-field">
+  <div class="signup-wrapper">
+    <h2>SIGNUP</h2>
+    <div class="signup-field">
       <label for="username" />
       <span class="material-symbols-outlined icon"> account_circle </span>
       <input type="text" name="username" v-model="username" placeholder="Username" />
     </div>
-    <div class="login-field">
+    <div class="signup-field">
       <label for="password" />
       <span class="material-symbols-outlined icon"> key_vertical </span>
-      <input type="password" name="password" v-model="password" placeholder="Password" />
+      <input type="password" name="password" v-model="password1" placeholder="Password" />
     </div>
-    <div class="login-field error" v-if="error">
+    <div class="signup-field">
+      <label for="password" />
+      <span class="material-symbols-outlined icon"> key_vertical </span>
+      <input type="password" name="password" v-model="password2" placeholder="Re-enter password" />
+    </div>
+    <div class="signup-field error" v-if="error">
       <span class="material-symbols-outlined icon"> error </span>
       <span>{{ error }}</span>
     </div>
-    <div class="login-field">
-      <button @click="onClick">Login</button>
+    <div class="signup-field">
+      <button @click="onClick">signup</button>
     </div>
-    <div class="login-field">
+    <div class="signup-field">
       <div class="links">
         <div class="anchor">
-          <a>Forgot Password</a>
-        </div>
-        <div class="anchor">
-          <router-link to="/signup" class="router-link">SignUp</router-link>
+          <router-link to="/login" class="router-link">Login</router-link>
         </div>
       </div>
     </div>
@@ -32,39 +34,34 @@
 </template>
 
 <script setup>
-import { useUserStore } from '@/stores/user'
-import { useRouter } from 'vue-router'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '../stores/user.ts'
 
-const userStore = useUserStore()
 const router = useRouter()
+const userStore = useUserStore()
+
 const username = ref('')
-const password = ref('')
+const password1 = ref('')
+const password2 = ref('')
 const error = ref('')
 
 const onClick = () => {
-  if (username.value.length < 4 || password.value.length < 4) {
+  if (password1.value !== password2.value) {
+    error.value = 'Passwords not equal '
+  } else if (username.value.length < 4 || password1.value.length < 4) {
     error.value = 'Username and password must have minimum of 4 characters '
   } else {
-    const storedUsername = localStorage.getItem('username')
-    const storedPassword = localStorage.getItem('password')
-    if (!storedUsername) {
-      error.value = 'Please signup'
-    } else {
-      if (username.value === storedUsername && password.value === storedPassword) {
-        userStore.isAuthenticated = true
-        const from = router.currentRoute.value.query.from || '/'
-        router.push(from)
-      } else {
-        error.value = 'Invalid credentails'
-      }
-    }
+    localStorage.setItem('username', username.value)
+    localStorage.setItem('password', password1.value)
+    userStore.userName = username
+    router.push('/login')
   }
 }
 </script>
 
 <style lang="scss">
-.login-wrapper {
+.signup-wrapper {
   background-color: var(--form-background);
   display: flex;
   flex-direction: column;
@@ -83,7 +80,7 @@ const onClick = () => {
     color: var(--heading-color);
   }
 
-  .login-field {
+  .signup-field {
     display: flex;
     justify-content: center;
     width: 80%;

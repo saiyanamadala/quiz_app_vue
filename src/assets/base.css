@@ -1,3 +1,11 @@
+:root {
+  --form-background: rgb(230, 235, 232);
+  --heading-color: black;
+  --button-text-color: white;
+  --icon-color: rgba(0, 0, 0, 0.6);
+  --error-color: rgb(203, 138, 138);
+}
+
 * {
   margin: 0;
   padding: 0;
