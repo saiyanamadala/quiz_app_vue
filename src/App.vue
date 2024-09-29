@@ -7,6 +7,9 @@ import { RouterView } from 'vue-router'
     <div class="wrapper"></div>
   </header>
 
+  <div>
+    <h1 class="title">Quiz App</h1>
+  </div>
   <RouterView />
 </template>
 
