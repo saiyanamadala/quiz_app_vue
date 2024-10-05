@@ -18,12 +18,28 @@ const router = createRouter({
       name: 'Login',
       component: LoginView,
       meta: { requiresAuth: false },
+      beforeEnter: (to, from, next) => {
+        if (useUserStore().isAuthenticated) {
+          next('/');
+        }
+        else {
+          next();
+        }
+      }
     },
     {
       path: '/signup',
       name: 'Signup',
       component: () => import('../views/SignupView.vue'),
       meta: { requiresAuth: false },
+      beforeEnter: (to, from, next) => {
+        if (useUserStore().isAuthenticated) {
+          next('/');
+        }
+        else {
+          next();
+        }
+      }
     }
   ]
 })
