@@ -108,7 +108,7 @@ const onClick = () => {
     padding: 10px;
     padding-left: 30px;
     border-radius: 5px;
-    border: none;
+    border: 1px solid grey;
     font-size: medium;
   }
 
