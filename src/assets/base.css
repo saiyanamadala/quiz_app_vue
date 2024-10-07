@@ -6,6 +6,11 @@
   --error-color: rgb(203, 138, 138);
 }
 
+html,
+body {
+  height: 100%;
+}
+
 * {
   margin: 0;
   padding: 0;

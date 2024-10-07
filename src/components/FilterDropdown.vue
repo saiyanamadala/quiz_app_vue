@@ -3,7 +3,7 @@
     <label for="dropdown">{{ props.label }}</label>
   </div>
   <div>
-    <select id="dropdown" v-model="selectedOption" @change="onClick">
+    <select id="dropdown" v-model="selectedOption" @change="onClick" class="filter-dropdown">
       <option v-for="option in props.options" :key="option.id" :value="option.name">
         {{ option.name }}
       </option>
@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref } from 'vue'
+import { defineProps, defineEmits, ref } from 'vue'
 
 interface Options {
   id: number
@@ -25,10 +25,14 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const emit = defineEmits<{
+  (event: 'selected-option', value: string): void
+}>()
 
 const selectedOption = ref(props.options[0].name)
 
 const onClick = () => {
   console.log(selectedOption.value)
+  emit('selected-option', selectedOption.value)
 }
 </script>
