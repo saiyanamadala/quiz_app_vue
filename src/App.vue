@@ -79,7 +79,8 @@ const logout = () => {
   }
 
   .dropdown li:hover {
-    background-color: #f0f0f0;
+    background-color: #df2d2d;
+    color: white;
   }
 }
 </style>
