@@ -74,8 +74,9 @@ const onClick = () => {
   gap: 10px;
   position: absolute;
   width: 90%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%);
+  transform: translate(-50%, -50%);
   max-width: 400px;
   border-radius: 5px;
   padding: 10px;
